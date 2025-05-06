@@ -9,3 +9,12 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE, verbose_name='Место')
+    image = models.ImageField('Картинка', upload_to='places')
+    position = models.PositiveIntegerField('Позиция', default=0)
+
+    def __str__(self):
+        return f"{self.place.title} - {self.position}"
