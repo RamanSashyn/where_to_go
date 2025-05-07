@@ -14,7 +14,10 @@ class Place(models.Model):
 class Image(models.Model):
     place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE, verbose_name='Место')
     image = models.ImageField('Картинка', upload_to='places')
-    position = models.PositiveIntegerField('Позиция', default=0)
+    position = models.PositiveIntegerField('Позиция', default=0, blank=False, null=False)
+
+    class Meta:
+        ordering = ['position']
 
     def __str__(self):
         return f"{self.place.title} - {self.position}"
