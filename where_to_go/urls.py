@@ -22,6 +22,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('places/<int:place_id>/', views.place_details, name='place-details'),
 ]
 
 if settings.DEBUG:
