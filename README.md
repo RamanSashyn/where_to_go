@@ -113,6 +113,23 @@ python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to
 https://github.com/devmanorg/where-to-go-places/tree/master/places
 Нажмите на нужный файл, затем Raw — и скопируйте ссылку для передачи в команду.
 
+### Пример JSON-файла
+```json
+{
+  "title": "Антикафе Bizone",
+  "imgs": [
+    "https://...1.jpg",
+    "https://...2.jpg"
+  ],
+  "description_short": "Короткое описание",
+  "description_long": "<p>HTML-описание...</p>",
+  "coordinates": {
+    "lng": "37.50169",
+    "lat": "55.816591"
+  }
+}
+```
+
 ## Автор
 
 Raman Sashyn — 2025
