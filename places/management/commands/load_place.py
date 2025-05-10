@@ -36,7 +36,7 @@ class Command(BaseCommand):
             img_response = requests.get(image_url)
             img_response.raise_for_status()
 
-            image_name = os.path.basename(image_url)  # Брать имя файла из URL
+            image_name = os.path.basename(image_url)
             image = Image(place=place, position=idx)
             image.image.save(
                 image_name,
