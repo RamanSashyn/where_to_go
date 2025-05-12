@@ -31,8 +31,9 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['place', 'position', 'preview']
     readonly_fields = ['preview']
     ordering = ['place', 'position']
+    raw_id_fields = ['place']
 
     def preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" style="max-height: 200px;"/>', obj.image.url)
+            return format_html('<img src="{}" style="max-height: 200px; max-width: 300px;" />', obj.image.url)
         return "Нет изображения"
