@@ -18,15 +18,15 @@ class Command(BaseCommand):
         response = requests.get(json_url)
         response.raise_for_status()
 
-        data = response.json()
-        title = data["title"]
+        place_payload = response.json()
+        title = place_payload["title"]
         place, created = Place.objects.get_or_create(
             title=title,
             defaults={
-                "short_description": data.get("description_short", ""),
-                "long_description": data.get("description_long", ""),
-                "latitude": data["coordinates"]["lat"],
-                "longitude": data["coordinates"]["lng"],
+                "short_description": place_payload.get("description_short", ""),
+                "long_description": place_payload.get("description_long", ""),
+                "latitude": place_payload["coordinates"]["lat"],
+                "longitude": place_payload["coordinates"]["lng"],
             },
         )
 
@@ -34,7 +34,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(f'Place "{title}" already exists.'))
             return
 
-        for idx, image_url in enumerate(data["imgs"]):
+        for idx, image_url in enumerate(place_payload["imgs"]):
             img_response = requests.get(image_url)
             img_response.raise_for_status()
 
