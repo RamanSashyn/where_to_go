@@ -39,7 +39,10 @@ class Command(BaseCommand):
             img_response.raise_for_status()
 
             image_name = os.path.basename(image_url)
-            image = Image(place=place, position=idx)
-            image.image.save(image_name, ContentFile(img_response.content), save=True)
+            Image.objects.create(
+                place=place,
+                position=idx,
+                image=ContentFile(img_response.content, name=image_name)
+            )
 
         self.stdout.write(self.style.SUCCESS(f'Successfully loaded "{title}"'))
