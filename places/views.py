@@ -6,10 +6,10 @@ from places.models import Place
 
 
 def index(request):
-    places = []
+    serialized_places = []
 
     for place in Place.objects.all():
-        places.append(
+        serialized_places.append(
             {
                 "type": "Feature",
                 "geometry": {
@@ -24,7 +24,7 @@ def index(request):
             }
         )
 
-    geojson = {"type": "FeatureCollection", "features": places}
+    geojson = {"type": "FeatureCollection", "features": serialized_places}
 
     context = {
         "places_geojson": geojson,
@@ -39,7 +39,7 @@ def place_details(request, place_id):
         id=place_id
     )
 
-    place_data = {
+    serialized_place = {
         "title": place.title,
         "imgs": [image.image.url for image in place.images.all()],
         "description_short": place.short_description,
@@ -51,6 +51,6 @@ def place_details(request, place_id):
     }
 
     return JsonResponse(
-        place_data,
+        serialized_place,
         json_dumps_params={"ensure_ascii": False, "indent": 2},
     )
